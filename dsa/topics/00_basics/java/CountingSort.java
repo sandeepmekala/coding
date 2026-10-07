@@ -16,25 +16,25 @@ public class CountingSort {
 	public int[] countingSort(int[] numbers){
 		int n = numbers.length;
 		int numFreq[] = new int[4];
-		int sortedArray[] = new int[n];
-
+		
 		// find frequencies
 		for(int i=0; i<n; i++){
 			numFreq[numbers[i]]++;
 		}
-
+		
 		// cumulative sum of frequencies
 		for(int i=1; i<numFreq.length; i++){
 			numFreq[i] = numFreq[i] + numFreq[i-1];
 		}
-
+		
 		// cumulative sum gives from which position the next element should start.
 		// To get from which position the current element should start, we need to shift the indices by one position to right.
 		for(int i=numFreq.length-1; i>0; i--){
 			numFreq[i] = numFreq[i-1];
 		}
 		numFreq[0] = 0;
-
+		
+		int sortedArray[] = new int[n];
 		for(int i=0; i<n; i++){
 			int num = numbers[i];
 			int index = numFreq[num];
